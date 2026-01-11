@@ -1,0 +1,5 @@
+{
+  "name": "Historian's Bookshelf",
+  "description": "An AI-powered librarian that recommends history books based on a user's topic of interest, such as a historical era, region, or figure.",
+  "requestFramePermissions": []
+}
