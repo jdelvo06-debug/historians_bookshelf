@@ -10,7 +10,7 @@ Historian's Bookshelf is an AI-powered book recommendation web app that uses Goo
 
 ```bash
 npm install          # Install dependencies
-npm run dev          # Start dev server on http://localhost:3000
+npm run dev          # Start dev server on http://localhost:4001
 npm run build        # Production build
 npm run preview      # Preview production build
 ```
@@ -27,7 +27,10 @@ App.tsx                    # Main component - state management, view switching (
 │   ├── InitialState.tsx       # Welcome screen with example topics
 │   ├── RelatedTopics.tsx      # Suggested related topics after search
 │   ├── LoadingSpinner.tsx     # Loading state
-│   └── ErrorMessage.tsx       # Error display
+│   ├── ErrorMessage.tsx       # Error display
+│   └── ThemeToggle.tsx        # Dark mode toggle (light/dark/system)
+├── hooks/
+│   └── useTheme.ts            # Theme state, localStorage, system preference detection
 ├── services/
 │   └── geminiService.ts       # Gemini API integration with structured output schema
 └── types.ts                   # BookRecommendation and GeminiResponse interfaces
@@ -40,12 +43,14 @@ App.tsx                    # Main component - state management, view switching (
 3. `geminiService.ts` sends structured prompt to Gemini 2.5 Flash with JSON schema
 4. Response validated and filtered → displayed via `BookRecommendationCard`
 5. Favorites persisted to `localStorage` under key `historianFavorites`
+6. Theme preference persisted to `localStorage` under key `historianTheme`
 
 ### Key Patterns
 
 - **Gemini Integration:** Uses `@google/genai` with `Type` schema for structured JSON output. The schema enforces required fields (title, author, summary, purchaseLink, coverImageURL) and includes relatedTopics array.
 - **State Management:** React hooks only (useState, useCallback, useEffect). No external state library.
 - **Styling:** Tailwind CSS utilities. Color palette uses amber (primary), stone (neutral). Fonts loaded via CDN (Merriweather serif for headings, Source Sans 3 for body).
+- **Dark Mode:** Uses Tailwind's `class` strategy with `dark:` variants. Three modes: light, dark, system (follows OS). Theme stored in localStorage, with flash-prevention script in `index.html` to apply theme before React hydrates.
 - **Environment Variables:** `GEMINI_API_KEY` from `.env.local` is injected via Vite's `define` config as `process.env.API_KEY`.
 
 ### Import Alias

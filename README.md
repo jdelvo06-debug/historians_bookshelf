@@ -1,54 +1,80 @@
-# CLAUDE.md
+# Historian's Bookshelf
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+An AI-powered book recommendation web app that uses Google Gemini to recommend history books based on user-provided topics.
 
-## Project Overview
+## Features
 
-Historian's Bookshelf is an AI-powered book recommendation web app that uses Google Gemini to recommend history books based on user-provided topics. Built with React 19, TypeScript, and Vite.
+- **AI-Powered Recommendations** - Get curated history book suggestions powered by Google Gemini
+- **Topic-Based Search** - Enter any historical topic, era, or figure
+- **Related Topics** - Discover related subjects after each search
+- **Favorites** - Save books to your personal collection
+- **Reading Lists** - Organize books into custom lists
+- **Dark Mode** - Toggle between light, dark, and system themes
 
-## Development Commands
+## Tech Stack
+
+- React 19 + TypeScript
+- Vite
+- Tailwind CSS
+- Google Gemini API
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js 18+
+- Google Gemini API key
+
+### Installation
 
 ```bash
-npm install          # Install dependencies
-npm run dev          # Start dev server on http://localhost:3000
+npm install
+```
+
+### Environment Setup
+
+Create a `.env.local` file:
+
+```
+GEMINI_API_KEY=your_api_key_here
+```
+
+### Development
+
+```bash
+npm run dev          # Start dev server on http://localhost:4001
 npm run build        # Production build
 npm run preview      # Preview production build
 ```
 
-**Environment setup:** Set `GEMINI_API_KEY` in `.env.local` before running.
-
-## Architecture
+## Project Structure
 
 ```
-App.tsx                    # Main component - state management, view switching (search/favorites)
+App.tsx                    # Main component - state management, view switching
 ├── components/
-│   ├── SearchBar.tsx          # Topic input with Enter key support
-│   ├── BookRecommendationCard.tsx  # Book display with favorite toggle
+│   ├── SearchBar.tsx          # Topic input with education level selector
+│   ├── BookRecommendationCard.tsx  # Book display with favorite/list actions
 │   ├── InitialState.tsx       # Welcome screen with example topics
 │   ├── RelatedTopics.tsx      # Suggested related topics after search
 │   ├── LoadingSpinner.tsx     # Loading state
-│   └── ErrorMessage.tsx       # Error display
+│   ├── ErrorMessage.tsx       # Error display
+│   └── ThemeToggle.tsx        # Dark mode toggle (light/dark/system)
+├── hooks/
+│   └── useTheme.ts            # Theme state and system preference detection
 ├── services/
-│   └── geminiService.ts       # Gemini API integration with structured output schema
-└── types.ts                   # BookRecommendation and GeminiResponse interfaces
+│   └── geminiService.ts       # Gemini API integration
+└── types.ts                   # TypeScript interfaces
 ```
 
-### Data Flow
+## Color Palette
 
-1. User enters topic → `SearchBar` calls `handleSearch()`
-2. `searchQuery` state change triggers `useEffect` → calls `getBookRecommendation()`
-3. `geminiService.ts` sends structured prompt to Gemini 2.5 Flash with JSON schema
-4. Response validated and filtered → displayed via `BookRecommendationCard`
-5. Favorites persisted to `localStorage` under key `historianFavorites`
+| Element | Light | Dark |
+|---------|-------|------|
+| Background | stone-50 | stone-900 |
+| Cards | white | stone-800 |
+| Primary text | stone-800 | stone-100 |
+| Accent | amber-800 | amber-400 |
 
-### Key Patterns
+## License
 
-- **Gemini Integration:** Uses `@google/genai` with `Type` schema for structured JSON output. The schema enforces required fields (title, author, summary, purchaseLink, coverImageURL) and includes relatedTopics array.
-- **State Management:** React hooks only (useState, useCallback, useEffect). No external state library.
-- **Styling:** Tailwind CSS utilities. Color palette uses amber (primary), stone (neutral). Fonts loaded via CDN (Merriweather serif for headings, Source Sans 3 for body).
-- **Environment Variables:** `GEMINI_API_KEY` from `.env.local` is injected via Vite's `define` config as `process.env.API_KEY`.
-
-### Import Alias
-
-`@/*` maps to the project root (configured in `vite.config.ts` and `tsconfig.json`).
-
+MIT
