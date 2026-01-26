@@ -33,13 +33,13 @@ const SearchBar: React.FC<SearchBarProps> = ({ topic, setTopic, onSearch, isLoad
           onChange={(e) => setTopic(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder="E.g., Ancient Rome, Napoleon, The American West..."
-          className="w-full px-4 py-3 border border-stone-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-shadow duration-200 text-base"
+          className="w-full px-4 py-3 border border-stone-300 dark:border-stone-600 rounded-lg bg-white dark:bg-stone-800 text-stone-800 dark:text-stone-100 placeholder:text-stone-400 dark:placeholder:text-stone-500 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-shadow duration-200 text-base"
           disabled={isLoading}
         />
         <button
           onClick={onSearch}
           disabled={isLoading}
-          className="w-full sm:w-auto flex items-center justify-center px-6 py-3 bg-amber-800 text-white font-semibold rounded-lg hover:bg-amber-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-700 transition-colors duration-200 disabled:bg-stone-400 disabled:cursor-not-allowed"
+          className="w-full sm:w-auto flex items-center justify-center px-6 py-3 bg-amber-800 dark:bg-amber-700 text-white font-semibold rounded-lg hover:bg-amber-900 dark:hover:bg-amber-600 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-stone-800 focus:ring-amber-700 transition-colors duration-200 disabled:bg-stone-400 dark:disabled:bg-stone-600 disabled:cursor-not-allowed"
         >
           {isLoading ? (
             <>
@@ -55,7 +55,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ topic, setTopic, onSearch, isLoad
         </button>
       </div>
       <div className="flex items-center gap-2">
-        <label htmlFor="education-level" className="text-sm text-stone-600">
+        <label htmlFor="education-level" className="text-sm text-stone-600 dark:text-stone-400">
           Reading level:
         </label>
         <select
@@ -63,7 +63,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ topic, setTopic, onSearch, isLoad
           value={educationLevel}
           onChange={(e) => setEducationLevel(e.target.value as EducationLevel)}
           disabled={isLoading}
-          className="px-3 py-1.5 text-sm border border-stone-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-shadow duration-200 bg-white disabled:bg-stone-100 disabled:cursor-not-allowed"
+          className="px-3 py-1.5 text-sm border border-stone-300 dark:border-stone-600 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-shadow duration-200 bg-white dark:bg-stone-800 text-stone-800 dark:text-stone-100 disabled:bg-stone-100 dark:disabled:bg-stone-700 disabled:cursor-not-allowed"
         >
           {(Object.keys(educationLevelLabels) as EducationLevel[]).map((level) => (
             <option key={level} value={level}>

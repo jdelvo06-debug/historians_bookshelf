@@ -16,16 +16,16 @@ const exampleTopics = [
 
 const InitialState: React.FC<InitialStateProps> = ({ onTopicSelect }) => {
     return (
-        <div className="text-center p-6 bg-stone-100/50 rounded-lg">
-            <h3 className="text-xl font-semibold text-stone-700 font-serif">Welcome!</h3>
-            <p className="mt-2 text-stone-600">Enter a historical topic, era, or figure above to get a book recommendation.</p>
-            <p className="mt-4 text-sm text-stone-500">Or try one of these examples:</p>
+        <div className="text-center p-6 bg-stone-100/50 dark:bg-stone-800/50 rounded-lg">
+            <h3 className="text-xl font-semibold text-stone-700 dark:text-stone-300 font-serif">Welcome!</h3>
+            <p className="mt-2 text-stone-600 dark:text-stone-400">Enter a historical topic, era, or figure above to get a book recommendation.</p>
+            <p className="mt-4 text-sm text-stone-500 dark:text-stone-400">Or try one of these examples:</p>
             <div className="mt-4 flex flex-wrap justify-center gap-2">
                 {exampleTopics.map((topic) => (
                     <button
                         key={topic}
                         onClick={() => onTopicSelect(topic)}
-                        className="px-3 py-1 bg-white text-amber-800 border border-amber-300 rounded-full text-sm hover:bg-amber-50 hover:border-amber-400 transition-colors"
+                        className="px-3 py-1 bg-white dark:bg-stone-700 text-amber-800 dark:text-amber-400 border border-amber-300 dark:border-amber-700 rounded-full text-sm hover:bg-amber-50 dark:hover:bg-stone-600 hover:border-amber-400 dark:hover:border-amber-600 transition-colors"
                     >
                         {topic}
                     </button>
